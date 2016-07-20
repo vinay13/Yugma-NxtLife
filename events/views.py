@@ -39,22 +39,22 @@ def event_list(request):
 def event_detail(request, pk):
 
     try:
-        events = Event.objects.get(pk=pk)
+        event2 = Event.objects.get(pk=pk)
     except Event.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = EventSerializer(events)
+        serializer = EventSerializer(event2)
         return JSONResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = EventSerializer(events, data=data)
+        serializer = EventSerializer(event2, data=data)
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data)
         return JSONResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        events.delete()
+        event2.delete()
         return HttpResponse(status=204)

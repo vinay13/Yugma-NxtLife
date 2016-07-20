@@ -14,7 +14,7 @@ class Event(models.Model):
 	event_date = models.DateField(auto_now=True)
 	start_time = models.TimeField(db_index=True,default="10:00")
 	end_time = models.TimeField(default="14:00")
-	event_type_id =models.IntegerField(blank=True)
+	event_type_id =models.IntegerField(null=True,blank=True)
 	event_standard = models.CharField(max_length=128,blank=True)
 
 

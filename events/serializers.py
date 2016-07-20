@@ -6,4 +6,4 @@ from events.models import Event
 class EventSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Event
-		fields='all'
+		fields='__all__'
