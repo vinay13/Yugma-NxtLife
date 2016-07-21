@@ -16,3 +16,14 @@ class Poll(models.Model):
 	def __str__(self):
 		return self.question
 
+
+
+class Options(models.Model):
+	
+	options = models.CharField(max_length=122)
+
+
+	def __str__(self):
+		returns self.options
+
+
