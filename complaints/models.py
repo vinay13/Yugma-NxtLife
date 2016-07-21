@@ -15,10 +15,10 @@ class Complaint(models.Model):
 	body = models.TextField()
 	category_id = models.CharField(max_length=122,blank=True)
 	against_id = models.CharField(max_length=122,blank=True)
-	anonymous = models.BooleanField(defualt = True)
+	anonymous = models.BooleanField(default = True)
 	status = models.CharField(max_length=12,choices=STATUS_CHOICES)
-	createdDate = models.DateTime(auto_now = True)
-	closedDate = models.DateTime()
+	createdDate = models.DateTimeField(auto_now = True)
+	closedDate = models.DateTimeField()
 	user = models.CharField(max_length=12,blank=True)
 	assignedTo = models.CharField(max_length=122,blank=True)
 
@@ -38,7 +38,7 @@ class ComplaintComment(models.Model):
 	complaint_id  = models.CharField(max_length=1,blank=True)
 	employee_id = models.CharField(max_length=1,blank=True)
 	parent_id = models.CharField(max_length=2,blank=True)
-	time = models.DateTime(auto_now=True)
+	time = models.DateTimeField(auto_now=True)
 
 
 	def __str__(self):
