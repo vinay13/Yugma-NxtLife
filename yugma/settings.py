@@ -28,6 +28,25 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
+# CELERY SETTINGS
+#import celery
+BROKER_URL = "redis://127.0.0.1:6379/0"
+BROKER_TRANSPORT = 'redis'
+#CELERY_ACCEPT_CONTENT = ['json']
+#CELERY_TASK_SERIALIZER = 'json'
+#CELERY_RESULT_SERIALIZER = 'json'
+#CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", 'redis://redis:6379/0')
+
+"""
+BROKER_URL = 'redis://localhost:6379/0'
+
+"""
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,11 +56,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'base',
     'events',
     'accounts',
     'polls',
+    'complaints',
+    'suggestions',
+    'category',
+    'homework',
+    'devices',
     'rest_framework.authtoken',
     'rest_framework',
+    'rest_framework_docs',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -74,7 +100,7 @@ TEMPLATES = [
 ]
 
 
-
+"""
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -86,7 +112,7 @@ REST_FRAMEWORK = {
 }
 
 
-
+"""
 
 
 
@@ -97,12 +123,20 @@ WSGI_APPLICATION = 'yugma.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+"""
+import sys
+if 'test' in sys.argv or 'test_coverage' in sys.argv: #Covers regular testing and django-coverage
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+"""
 
 
 # Password validation

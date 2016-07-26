@@ -26,7 +26,13 @@ urlpatterns = [
     url(r'^admin', admin.site.urls),
     url(r'^', include('events.urls')),
     url(r'^',include('accounts.urls')),
-    url(r'^api-token-auth/', views.obtain_auth_token)
+    url(r'^',include('polls.urls')),
+    url(r'^',include('complaints.urls')),
+   # url(r'^',include('suggestions.urls')),
+    url(r'^',include('category.urls')),
+    url(r'^',include('homework.urls')),
+    url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^docs/', include('rest_framework_docs.urls')),
 ]
 
 
