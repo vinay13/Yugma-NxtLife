@@ -1,4 +1,5 @@
-from celery.registry import Task
+from celery import Celery
+from celery import Task
 from celery.task import Task
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
