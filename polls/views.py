@@ -20,3 +20,32 @@ def poll_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+@api_view(['GET','DELETE'])
+def poll_detail(request,pk):
+
+    try:
+        poll = Poll.object.get(pk=pk)
+    except Poll.DoesNotExist:
+        return HttpResponse(status=401)
+
+
+    if request.method == 'GET':
+        #polls = Poll.objects.all()
+        serializer = PollSerializer(poll,many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        poll.delete()
+        return Response(status=400)
+
+
+
+
+
+
+
