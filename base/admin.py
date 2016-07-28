@@ -17,7 +17,7 @@ def save_model(self, request, obj, form, change):
 
 class TimeAuditAdmin(admin.ModelAdmin):
 	list_display = ('created_at','modified_at',)
-	exclude = ('created_by', 'modified_by',)
+	#exclude = ('created_by', 'modified_by',)
 
 
 

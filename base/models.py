@@ -6,11 +6,16 @@ import datetime
 from django.contrib.auth.models import User
 from django.db import models
 
+from datetime import datetime
+#default = datetime.datetime.now
 
 class TimeAuditModel(models.Model):
 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
-    modified_at = models.DateTimeField(auto_now=True, verbose_name="Last Modified At")
+    created_at = models.DateTimeField(default = datetime.now)
+    modified_at = models.DateTimeField(default = datetime.now)
+
+    # created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
+    #modified_at = models.DateTimeField(auto_now=True, verbose_name="Last Modified At")
 
     class Meta:
         abstract = True
