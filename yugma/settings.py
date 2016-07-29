@@ -31,23 +31,68 @@ ALLOWED_HOSTS = []
 
 
 # CELERY SETTINGS
-#import celery
+"""
+import celery
 BROKER_URL = "redis://127.0.0.1:6379/0"
 BROKER_TRANSPORT = 'redis'
-#CELERY_ACCEPT_CONTENT = ['json']
-#CELERY_TASK_SERIALIZER = 'json'
-#CELERY_RESULT_SERIALIZER = 'json'
-#CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", 'redis://redis:6379/0')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", 'redis://redis:6379/0')
+""" 
 
-"""
-BROKER_URL = 'redis://localhost:6379/0'
+import djcelery
+djcelery.setup_loader()
+#BROKER_URL = 'django://'
 
-"""
-
-
-
+BROKER_URL = "amqp://guest:guest@localhost:5672//"
 
 # Application definition
+
+
+
+"""
+
+DJANGO_APPS = (
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    )
+
+
+THIRD_PARTY_APPS = (
+
+    'djcelery',
+    'kombu.transport.django',
+    'rest_framework.authtoken',
+    'rest_framework',
+    'rest_framework_docs',
+
+    )
+
+
+
+OUR_APPS = (
+            'base',
+            'events',
+            'accounts',
+            'polls',
+            'complaints',
+            'suggestions',
+            'category',
+            'homework',
+            'devices',
+        )
+
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + OUR_APPS
+
+"""
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -65,6 +110,9 @@ INSTALLED_APPS = [
     'category',
     'homework',
     'devices',
+    'djcelery',
+    'push_notifications',
+    'kombu.transport.django',
     'rest_framework.authtoken',
     'rest_framework',
     'rest_framework_docs',
@@ -100,6 +148,17 @@ TEMPLATES = [
 ]
 
 
+PUSH_NOTIFICATIONS_SETTINGS = {
+        "GCM_API_KEY": "AIzaSyCRmaLDSr6wFLQAJvW-1Eyu1884tA2ghys",
+        "APNS_CERTIFICATE": "yugma/Certificates.pem",
+}
+
+
+
+
+
+
+
 """
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -114,7 +173,11 @@ REST_FRAMEWORK = {
 
 """
 
-
+REST_FRAMEWORK = {
+    
+            'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',
+            'PAGE_SIZE' : 30
+}
 
 
 WSGI_APPLICATION = 'yugma.wsgi.application'

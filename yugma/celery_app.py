@@ -3,25 +3,24 @@ from __future__ import absolute_import, unicode_literals
 
 # Standard Library
 import os
-
+# Third Party Stuff
+from celery import Celery
+#from django.conf import settings
 
 #
 
 from celery import Task
 from celery.task import Task
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
+
 #from django.core.mail import EmailMultiAlternativess
 #
 
 
 
-# Third Party Stuff
-from celery import Celery
-from django.conf import settings
+
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
 app = Celery('Task')
 
@@ -37,6 +36,8 @@ def add(x, y):
     return x + y
 
 
+#app.config_from_object('settings')
+#app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 
 
@@ -66,5 +67,3 @@ task.register(SendEmailTask)
 
 
 
-app.config_from_object('settings')
-app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

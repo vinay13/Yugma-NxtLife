@@ -46,3 +46,17 @@ class PollOptions :
 class PollType:
     _SCHOOL = [1,"SCHOOL"] 
     _CLASS =  [2,"CLASS"]
+
+
+
+@choices
+class EventType:
+    _HOUSE =    [1,"HOUSE"]
+    _CLASS =    [2,"CLASS"]
+    _SCHOOL =   [3,"SCHOOL"]
+    _NATIONAL = [4,"NATIONAL"]
+    _RESTRICTED = [5,"RESTRICTED"]
+    _EXAM =[6,"EXAM"]
+
+
+

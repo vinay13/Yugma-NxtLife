@@ -1,8 +1,37 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from homework.models import Homework
-from homework.serializers import HomeworkSerializer
+from homework.models import Homework , Subject
+from homework.serializers import HomeworkSerializer,SubjectSerializer
+
+
+
+
+
+@api_view(['GET','POST'])
+def subject_list(request):
+
+
+	if request.method == 'GET':
+		subject = Subject.objects.all()
+		serializer = SubjectSerializer(subject , many=True)
+		return Response(serializer.data)
+
+
+
+	elif request.method == 'POST':
+		serializer = SubjectSerializer(data = request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data,status = status.HTTP_201_CREATED)
+		return Respose(serializer.errors , status = status.HTTP_400_BAD_REQUEST)		
+
+
+
+
+
+
+
 
 
 @api_view(['GET', 'POST'])

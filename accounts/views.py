@@ -28,6 +28,8 @@ class UserList(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+
 class UserDetail(APIView):
 
     def get_object(self, pk):

@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from homework.models import Homework
+from homework.models import Homework , Subject
+
+
+
+class SubjectSerializer(serializers.ModelSerializer):
+	class Meta :
+		model = Subject
+		fields = '__all__'
 
 
 

@@ -22,13 +22,15 @@ from django.contrib import admin
 from rest_framework.authtoken import views
 
 
+admin.site.site_header = 'YUGMA Administration'
+
 urlpatterns = [
     url(r'^admin', admin.site.urls),
     url(r'^', include('events.urls')),
     url(r'^',include('accounts.urls')),
     url(r'^',include('polls.urls')),
     url(r'^',include('complaints.urls')),
-   # url(r'^',include('suggestions.urls')),
+    url(r'^',include('suggestions.urls')),
     url(r'^',include('category.urls')),
     url(r'^',include('homework.urls')),
     url(r'^api-token-auth/', views.obtain_auth_token),
