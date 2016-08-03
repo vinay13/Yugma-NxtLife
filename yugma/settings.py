@@ -33,8 +33,13 @@ ALLOWED_HOSTS = []
 # CELERY SETTINGS
 """
 import celery
+
+
 BROKER_URL = "redis://127.0.0.1:6379/0"
 BROKER_TRANSPORT = 'redis'
+
+
+
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -111,6 +116,8 @@ INSTALLED_APPS = [
     'homework',
     'devices',
     'djcelery',
+    'channels',
+    'simple_history',
     'push_notifications',
     'kombu.transport.django',
     'rest_framework.authtoken',
@@ -120,6 +127,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -155,6 +163,17 @@ PUSH_NOTIFICATIONS_SETTINGS = {
 
 
 
+CHANNEL_LAYERS = {
+            
+            "default":{
+                    "BACKEND":"asgi_redis.RedisChannelLayer",
+                    "CONFIG" : {
+                                "hosts": [("localhost", 6379)],
+                        },
+                    "ROUTING": "yugma.routing.channel_routing",
+            }
+}
+
 
 
 
@@ -176,8 +195,14 @@ REST_FRAMEWORK = {
 REST_FRAMEWORK = {
     
             'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',
-            'PAGE_SIZE' : 30
+            'PAGE_SIZE' : 1
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}
+
 
 
 WSGI_APPLICATION = 'yugma.wsgi.application'
