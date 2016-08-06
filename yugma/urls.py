@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^', include('events.urls')),
     url(r'^',include('accounts.urls')),
     url(r'^',include('polls.urls')),
+    url(r'^',include('chat.urls')),
     url(r'^',include('complaints.urls')),
     url(r'^',include('suggestions.urls')),
     url(r'^',include('category.urls')),

@@ -113,6 +113,7 @@ INSTALLED_APPS = [
     'complaints',
     'suggestions',
     'category',
+    'chat',
     'homework',
     'devices',
     'djcelery',
@@ -122,13 +123,18 @@ INSTALLED_APPS = [
     'kombu.transport.django',
     'rest_framework.authtoken',
     'rest_framework',
+    'corsheaders',
     'rest_framework_docs',
 ]
+
+
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -163,15 +169,21 @@ PUSH_NOTIFICATIONS_SETTINGS = {
 
 
 
+
+
+
+
+
 CHANNEL_LAYERS = {
             
             "default":{
                     "BACKEND":"asgi_redis.RedisChannelLayer",
-                    "CONFIG" : {
-                                "hosts": [("localhost", 6379)],
-                        },
+
+                   "CONFIG" : {
+                               "hosts": [("localhost", 6379)],
+                       },
                     "ROUTING": "yugma.routing.channel_routing",
-            }
+            },
 }
 
 
